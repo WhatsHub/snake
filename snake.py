@@ -1,3 +1,4 @@
+# Imports
 import pygame, sys, random
 
 class snake:
