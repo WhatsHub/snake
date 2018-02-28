@@ -9,7 +9,7 @@ class snake:
         self.__snake.append((headPosX, headPosY))
 
     # TODO: Make Gameboard bounds not static
-    def moveSnake(self, direction):
+    def movesnake(self, direction):
         # moving the snake's tail accordingly
         for i in range(len(self.__snake) - 1, 0, -1):
             self.__snake[i] =self.__snake[i - 1]

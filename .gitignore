@@ -3,3 +3,6 @@ snakeEnv
 
 # VS CODE #
 .vscode
+
+# pylint #
+.pylint

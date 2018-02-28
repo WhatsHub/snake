@@ -30,7 +30,7 @@ NAVYBLUE    = ( 60,      60,    100)
 DISPLAYSURF.fill(NAVYBLUE)
 
 # snake x and y coordinates
-snakeHead = snake(5,5)
+snakeHead = snake(5, 5)
 #snake = [(5, 5)] # snake head start position X = 5, Y = 5
 
 # the apple's position
@@ -50,16 +50,18 @@ inputQueue = Queue(2)
 direction = RIGHT
 
 # TODO: make gameboard bounds of snakeoutside() not static
-# detects if the snake is outside of the Gamescreen
-def snakeoutside():
-    if snakeHead.getHeadPosX() > 655 or snakeHead.getHeadPosX() < 5:
+
+def snakeoutside(head, gameboard):
+    """ detects if the snake is outside of the Gamescreen """
+    if head.getHeadPosX() > gameboard[0]-5 or head.getHeadPosX() < 5:
         return True
-    if snakeHead.getHeadPosY() > 475 or snakeHead.getHeadPosY() < 5:
+    if head.getHeadPosY() > gameboard[1]-5 or head.getHeadPosY() < 5:
         return True
     return False
 
-# True if the two directions dir1 and dir2 are opposite
+
 def opposite(dir1, dir2):
+    """ True if the two directions dir1 and dir2 are opposite """
     if dir1 == RIGHT and dir2 == LEFT:
         return True
     elif dir1 == LEFT and dir2 == RIGHT:
@@ -75,7 +77,8 @@ def opposite(dir1, dir2):
 
 # gameover routine
 def gameover():
-    print ("GAME OVER")
+    """ Exits the Game with a "Game Over" Message """
+    print("GAME OVER")
     pygame.quit()
     sys.exit()
 
@@ -85,7 +88,7 @@ while True:
     # draw background over the last frame
     DISPLAYSURF.fill(NAVYBLUE)
 
-    # TODO: Create class to handle the apple
+    # TODO:Create class to handle the apple
     # draw the apple
     pygame.draw.rect(DISPLAYSURF, RED, (applePosX, applePosY, 60, 60))
 
@@ -105,7 +108,7 @@ while True:
                 direction = tmp;
 
         # moving the snake's tail accordingly
-        snakeHead.moveSnake(direction)
+        snakeHead.movesnake(direction)
 
         # if the player hits one of the snakes tails the game is over
         if snakeHead.collides():
@@ -148,7 +151,7 @@ while True:
     # process input from the player
     for event in pygame.event.get():
 
-        if snakeoutside():
+        if snakeoutside(snakeHead,GAMEBOARD):
             if snakeHead.getHeadPosX() > GAMEBOARD[0]-5:
                 inputQueue.queue.clear()
                 inputQueue.put(RIGHT)
